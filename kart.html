@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kart</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #map {
+            height: 80vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kart</h1>
+        <nav>
+            <a href="index.html">Hjem</a>
+            <a href="bater.html">Leie båter</a>
+            <a href="kart.html">Kart</a>
+            <a href="kontakt.html">Kontakt</a>
+        </nav>
+    </header>
+
+    <section id="map">
+        <!-- Map will be embedded here -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Båtutleie Norge</p>
+    </footer>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script src="script.js"></script>
+</body>
+</html>
