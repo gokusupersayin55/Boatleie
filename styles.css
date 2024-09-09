@@ -37,6 +37,15 @@ button:hover {
     background-color: #555;
 }
 
+#filter {
+    padding: 20px;
+}
+
+form label, form input, form button {
+    display: block;
+    margin: 10px 0;
+}
+
 footer {
     text-align: center;
     padding: 20px;
@@ -45,4 +54,9 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+
+#map {
+    height: 80vh;
+    width: 100%;
 }
