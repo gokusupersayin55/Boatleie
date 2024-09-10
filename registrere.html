@@ -8,62 +8,44 @@
 </head>
 <body>
     <header>
-        <h1>Registrer din Båt</h1>
+        <h1>Registrer Din Båt</h1>
         <nav>
-            <ul>
-                <li><a href="index.html">Hjem</a></li>
-                <li><a href="bater.html">Tilgjengelige Båter</a></li>
-                <li><a href="kart.html">Kart</a></li>
-                <li><a href="registrere.html">Registrer Båt</a></li>
-                <li><a href="kontakt.html">Kontakt Oss</a></li>
-            </ul>
+            <a href="index.html">Hjem</a>
+            <a href="bater.html">Tilgjengelige Båter</a>
+            <a href="kart.html">Kart</a>
+            <a href="registrere.html">Registrer Båt</a>
+            <a href="kontakt.html">Kontakt Oss</a>
         </nav>
     </header>
 
     <main>
         <form id="boatForm">
-            <section class="image-upload">
-                <button type="button" id="addImages">Legg til bilder</button>
-                <input type="file" id="images" name="images" accept="image/*" multiple style="display: none;">
-                <div id="imagePreview"></div>
-            </section>
+            <h2>Registrer båt for utleie</h2>
 
-            <label for="name">
-                <input type="text" id="name" name="name" placeholder="Annonse overskrift" required>
-            </label>
+            <div id="imagePreview">
+                <!-- Bilder vil bli vist her -->
+            </div>
+            <button type="button" id="addImages">Legg til bilder</button>
 
-            <label for="location">
-                <select id="location" name="location" required>
-                    <!-- Kommuner vil bli lagt til her dynamisk -->
+            <label for="title" class="visually-hidden">Annonse overskrift</label>
+            <input type="text" id="title" name="title" placeholder="Annonse overskrift" required>
+
+            <div class="select-wrapper">
+                <label for="location" class="visually-hidden">Lokasjon</label>
+                <input type="text" id="location" name="location" placeholder="Søk kommune">
+                <div id="location-list"></div>
+            </div>
+
+            <div class="select-wrapper">
+                <label for="pricePer" class="visually-hidden">Pris per</label>
+                <select id="pricePer" name="pricePer" required>
+                    <option value="day">Pris per dag</option>
+                    <option value="hour">Pris per time</option>
                 </select>
-            </label>
+            </div>
 
-            <label for="description">
-                <textarea id="description" name="description" placeholder="Beskrivelse" required></textarea>
-            </label>
+            <label for="price" class="visually-hidden">Pris</label>
+            <input type="number" id="price" name="price" placeholder="Pris" required>
 
-            <section class="price-fields">
-                <label for="priceDay">
-                    <input type="number" id="priceDay" name="priceDay" placeholder="Pris per dag" required>
-                </label>
-                <label for="priceHour">
-                    <input type="number" id="priceHour" name="priceHour" placeholder="Pris per time" required>
-                </label>
-            </section>
-
-            <label for="size">
-                <input type="number" id="size" name="size" placeholder="Størrelse" required>
-                <span class="unit">fot</span>
-            </label>
-
-            <button type="submit" id="registerBoat">Registrer Båt</button>
-        </form>
-    </main>
-
-    <footer>
-        <p>© 2024 Båtutleie i Norge. Alle rettigheter reservert.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+            <div id="sizeField">
+                <label for="size" class="visually-hidden">Stør
