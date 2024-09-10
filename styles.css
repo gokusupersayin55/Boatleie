@@ -95,7 +95,7 @@ textarea::placeholder {
 }
 
 input[type="file"] {
-    margin-top: 10px;
+    display: none;
 }
 
 .image-upload {
@@ -121,6 +121,12 @@ textarea {
     min-height: 100px;
 }
 
+.unit {
+    margin-left: 5px;
+    color: #333;
+    font-size: 0.9em;
+}
+
 footer {
     text-align: center;
     margin-top: 40px;
@@ -135,4 +141,21 @@ footer {
     background-color: #e0e7ff;
     border: 1px solid #004080;
     border-radius: 5px;
+}
+
+/* Knapp for å legge til bilder */
+#addImages {
+    background-color: #004080;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+#addImages:hover {
+    background-color: #003366;
+    transform: scale(1.1);
 }

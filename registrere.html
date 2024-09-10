@@ -23,8 +23,8 @@
     <main>
         <form id="boatForm">
             <section class="image-upload">
-                <label for="images">Legg til bilder:</label>
-                <input type="file" id="images" name="images" accept="image/*" multiple>
+                <button type="button" id="addImages">Legg til bilder</button>
+                <input type="file" id="images" name="images" accept="image/*" multiple style="display: none;">
                 <div id="imagePreview"></div>
             </section>
 
@@ -53,6 +53,7 @@
 
             <label for="size">
                 <input type="number" id="size" name="size" placeholder="Størrelse" required>
+                <span class="unit">fot</span>
             </label>
 
             <button type="submit" id="registerBoat">Registrer Båt</button>
