@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrer Båt</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js"></script>
 </head>
 <body>
     <header>
@@ -24,30 +22,40 @@
 
     <main>
         <form id="boatForm">
-            <label for="title">Annonse overskrift:</label>
-            <input type="text" id="title" name="title" required>
+            <section class="image-upload">
+                <label for="images">Legg til bilder:</label>
+                <input type="file" id="images" name="images" accept="image/*" multiple>
+                <div id="imagePreview"></div>
+            </section>
 
-            <label for="location">Lokasjon:</label>
-            <input type="text" id="location" name="location" required>
-            <div id="location-suggestions"></div>
+            <label for="name">
+                <input type="text" id="name" name="name" placeholder="Annonse overskrift" required>
+            </label>
 
-            <label for="description">Beskrivelse:</label>
-            <textarea id="description" name="description" required></textarea>
+            <label for="location">
+                <select id="location" name="location" required>
+                    <!-- Kommuner vil bli lagt til her dynamisk -->
+                </select>
+            </label>
 
-            <label for="price">Pris per:</label>
-            <select id="price-period" name="price-period">
-                <option value="hour">Time</option>
-                <option value="day">Dag</option>
-            </select>
-            <input type="number" id="price" name="price" required> kr
+            <label for="description">
+                <textarea id="description" name="description" placeholder="Beskrivelse" required></textarea>
+            </label>
 
-            <label for="images">Bilder:</label>
-            <input type="file" id="images" name="images[]" accept="image/*" multiple>
+            <section class="price-fields">
+                <label for="priceDay">
+                    <input type="number" id="priceDay" name="priceDay" placeholder="Pris per dag" required>
+                </label>
+                <label for="priceHour">
+                    <input type="number" id="priceHour" name="priceHour" placeholder="Pris per time" required>
+                </label>
+            </section>
 
-            <label for="size">Størrelse:</label>
-            <input type="number" id="size" name="size" required>
+            <label for="size">
+                <input type="number" id="size" name="size" placeholder="Størrelse" required>
+            </label>
 
-            <button type="submit">Registrer Båt</button>
+            <button type="submit" id="registerBoat">Registrer Båt</button>
         </form>
     </main>
 
@@ -56,20 +64,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Kommuner i Norge for autocomplete
-        const municipalities = [
-            "Oslo", "Bergen", "Stavanger", "Drammen", "Kristiansand",
-            // ... Legg til alle kommuner her
-        ];
-
-        new Autocomplete('#location', {
-            data: municipalities,
-            threshold: 2,
-            onSelect: (suggestion) => {
-                console.log('Selected:', suggestion);
-            }
-        });
-    </script>
 </body>
 </html>
