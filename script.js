@@ -1,29 +1,71 @@
-// Placeholder for future interactivity
-console.log("Båtutleie Norge script aktivert");
-
-// Simple filter functionality (not complete; for demonstration purposes)
-document.getElementById('filterForm').addEventListener('submit', function(event) {
+// Funksjon for å registrere båt
+document.getElementById('boatForm')?.addEventListener('submit', async function(event) {
     event.preventDefault();
-    // Collect form data
-    const price = document.getElementById('price').value;
-    const location = document.getElementById('location').value;
-    const size = document.getElementById('size').value;
+    
+    const formData = new FormData(event.target);
+    const data = {
+        name: formData.get('name'),
+        location: formData.get('location'),
+        description: formData.get('description'),
+        price: formData.get('price'),
+        images: formData.get('images').split(','), // Splitter URL-ene ved komma
+        size: formData.get('size')
+    };
 
-    // Example filter logic (you need to implement this based on your data)
-    console.log(`Filter applied: Price ${price}, Location ${location}, Size ${size}`);
+    try {
+        const response = await fetch('http://localhost:5000/api/boats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        alert('Båt registrert: ' + result.name);
+    } catch (error) {
+        console.error('Feil ved registrering av båt:', error);
+    }
 });
 
-// Google Maps initialization
-function initMap() {
-    // Example location: Oslo
-    const oslo = { lat: 59.9139, lng: 10.7522 };
-    const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: oslo
-    });
-    const marker = new google.maps.Marker({
-        position: oslo,
-        map: map,
-        title: 'Oslo'
+// Funksjon for å hente båter fra backend
+async function fetchBoats() {
+    try {
+        const response = await fetch('http://localhost:5000/api/boats'); // Endre til riktig backend-URL hvis nødvendig
+        const boats = await response.json();
+
+        // Kall funksjonen for å vise båtene
+        displayBoats(boats);
+    } catch (error) {
+        console.error('Feil ved henting av båter:', error);
+    }
+}
+
+// Funksjon for å vise båtene på siden
+function displayBoats(boats) {
+    const boatsContainer = document.getElementById('boats-container');
+
+    // Tømmer containeren før vi legger til nye båter
+    boatsContainer.innerHTML = '';
+
+    // Gå gjennom hver båt og opprett HTML for den
+    boats.forEach(boat => {
+        const boatElement = document.createElement('div');
+        boatElement.classList.add('boat-item');
+
+        boatElement.innerHTML = `
+            <h3>${boat.name}</h3>
+            <p><strong>Lokasjon:</strong> ${boat.location}</p>
+            <p><strong>Beskrivelse:</strong> ${boat.description}</p>
+            <p><strong>Pris:</strong> ${boat.price} NOK per dag</p>
+            <p><strong>Størrelse:</strong> ${boat.size}</p>
+            <div class="boat-images">
+                ${boat.images.map(image => `<img src="${image}" alt="Bilde av ${boat.name}" />`).join('')}
+            </div>
+        `;
+
+        boatsContainer.appendChild(boatElement);
     });
 }
+
+// Kall funksjonen når siden lastes for å hente båtene
+fetchBoats();

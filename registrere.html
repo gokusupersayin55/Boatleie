@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrer Båt</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Registrer Båt</h1>
+        <nav>
+            <a href="index.html">Hjem</a>
+            <a href="bater.html">Leie båter</a>
+            <a href="kart.html">Kart</a>
+            <a href="kontakt.html">Kontakt</a>
+        </nav>
+    </header>
+
+    <section id="register">
+        <h2>Legg til din båt</h2>
+        <form id="boatForm">
+            <label for="name">Båtnavn:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="location">Lokasjon:</label>
+            <input type="text" id="location" name="location" required>
+            
+            <label for="description">Beskrivelse:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="price">Pris:</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="images">Bilde-URLer (komma-separert):</label>
+            <input type="text" id="images" name="images">
+
+            <label for="size">Størrelse:</label>
+            <input type="text" id="size" name="size" required>
+
+            <button type="submit">Registrer Båt</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Båtutleie Norge</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
