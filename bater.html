@@ -3,28 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Båter Til Leie</title>
+    <title>Tilgjengelige Båter</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Båter Til Leie</h1>
+        <h1>Tilgjengelige Båter</h1>
         <nav>
-            <a href="index.html">Hjem</a>
-            <a href="kart.html">Kart</a>
-            <a href="kontakt.html">Kontakt</a>
+            <ul>
+                <li><a href="index.html">Hjem</a></li>
+                <li><a href="bater.html">Tilgjengelige Båter</a></li>
+                <li><a href="kart.html">Kart</a></li>
+                <li><a href="registrere.html">Registrer Båt</a></li>
+                <li><a href="kontakt.html">Kontakt Oss</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section id="boat-list">
-        <h2>Tilgjengelige båter</h2>
-        <div id="boats-container"></div> <!-- Her vil båtene vises dynamisk -->
-    </section>
+    <main>
+        <section class="filter">
+            <h2>Filtrer båter</h2>
+            <form id="filterForm">
+                <label for="location">Lokasjon:</label>
+                <input type="text" id="location" name="location">
+                
+                <label for="price">Maks pris:</label>
+                <input type="number" id="price" name="price">
+                
+                <label for="size">Størrelse (meter):</label>
+                <input type="number" id="size" name="size">
+                
+                <button type="submit">Filtrer</button>
+            </form>
+        </section>
+
+        <section class="boat-list" id="boatList">
+            <h2>Tilgjengelige båter</h2>
+            <!-- Båter vil bli hentet og vist her -->
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2024 Båtutleie Norge</p>
+        <p>© 2024 Båtutleie i Norge. Alle rettigheter reservert.</p>
     </footer>
 
-    <script src="script.js"></script> <!-- Lenker til JavaScript-filen for å hente båtene -->
+    <script src="script.js"></script>
 </body>
 </html>

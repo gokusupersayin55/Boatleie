@@ -1,4 +1,4 @@
-// Funksjon for å registrere båt
+// Funksjon for å registrere en båt
 document.getElementById('boatForm')?.addEventListener('submit', async function(event) {
     event.preventDefault();
     
@@ -8,7 +8,7 @@ document.getElementById('boatForm')?.addEventListener('submit', async function(e
         location: formData.get('location'),
         description: formData.get('description'),
         price: formData.get('price'),
-        images: formData.get('images').split(','), // Splitter URL-ene ved komma
+        images: formData.get('images').split(','),
         size: formData.get('size')
     };
 
@@ -27,45 +27,32 @@ document.getElementById('boatForm')?.addEventListener('submit', async function(e
     }
 });
 
-// Funksjon for å hente båter fra backend
+// Funksjon for å hente båter og vise dem på "bater.html"
 async function fetchBoats() {
     try {
-        const response = await fetch('http://localhost:5000/api/boats'); // Endre til riktig backend-URL hvis nødvendig
+        const response = await fetch('http://localhost:5000/api/boats');
         const boats = await response.json();
-
-        // Kall funksjonen for å vise båtene
-        displayBoats(boats);
+        
+        const boatList = document.getElementById('boatList');
+        boats.forEach(boat => {
+            const boatItem = document.createElement('div');
+            boatItem.classList.add('boat-item');
+            boatItem.innerHTML = `
+                <h3>${boat.name}</h3>
+                <p>${boat.description}</p>
+                <p>Lokasjon: ${boat.location}</p>
+                <p>Pris: ${boat.price} NOK per dag</p>
+                <p>Størrelse: ${boat.size} meter</p>
+                <img src="${boat.images[0]}" alt="Bilde av ${boat.name}">
+            `;
+            boatList.appendChild(boatItem);
+        });
     } catch (error) {
         console.error('Feil ved henting av båter:', error);
     }
 }
 
-// Funksjon for å vise båtene på siden
-function displayBoats(boats) {
-    const boatsContainer = document.getElementById('boats-container');
-
-    // Tømmer containeren før vi legger til nye båter
-    boatsContainer.innerHTML = '';
-
-    // Gå gjennom hver båt og opprett HTML for den
-    boats.forEach(boat => {
-        const boatElement = document.createElement('div');
-        boatElement.classList.add('boat-item');
-
-        boatElement.innerHTML = `
-            <h3>${boat.name}</h3>
-            <p><strong>Lokasjon:</strong> ${boat.location}</p>
-            <p><strong>Beskrivelse:</strong> ${boat.description}</p>
-            <p><strong>Pris:</strong> ${boat.price} NOK per dag</p>
-            <p><strong>Størrelse:</strong> ${boat.size}</p>
-            <div class="boat-images">
-                ${boat.images.map(image => `<img src="${image}" alt="Bilde av ${boat.name}" />`).join('')}
-            </div>
-        `;
-
-        boatsContainer.appendChild(boatElement);
-    });
+// Kjør fetchBoats på bater.html
+if (document.getElementById('boatList')) {
+    fetchBoats();
 }
-
-// Kall funksjonen når siden lastes for å hente båtene
-fetchBoats();

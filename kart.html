@@ -5,32 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kart</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        #map {
-            height: 80vh;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
     <header>
-        <h1>Kart</h1>
+        <h1>Interaktivt Kart</h1>
         <nav>
-            <a href="index.html">Hjem</a>
-            <a href="bater.html">Leie båter</a>
-            <a href="kart.html">Kart</a>
-            <a href="kontakt.html">Kontakt</a>
+            <ul>
+                <li><a href="index.html">Hjem</a></li>
+                <li><a href="bater.html">Tilgjengelige Båter</a></li>
+                <li><a href="kart.html">Kart</a></li>
+                <li><a href="registrere.html">Registrer Båt</a></li>
+                <li><a href="kontakt.html">Kontakt Oss</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section id="map">
-        <!-- Map will be embedded here -->
-    </section>
+    <main>
+        <h2>Zoom inn på kartet for å finne båter</h2>
+        <div id="map" style="width: 100%; height: 500px;">
+            <!-- Kartet vil bli vist her -->
+        </div>
+    </main>
 
     <footer>
-        <p>&copy; 2024 Båtutleie Norge</p>
+        <p>© 2024 Båtutleie i Norge. Alle rettigheter reservert.</p>
     </footer>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
     <script src="script.js"></script>
 </body>
 </html>

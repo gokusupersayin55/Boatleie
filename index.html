@@ -3,29 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Båtutleie Norge</title>
+    <title>Båtutleie i Norge</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Båtutleie i Norge</h1>
+        <h1>Velkommen til Båtutleie i Norge</h1>
         <nav>
-            <a href="index.html">Hjem</a>
-            <a href="bater.html">Leie båter</a>
-            <a href="kart.html">Kart</a>
-            <a href="kontakt.html">Kontakt</a>
+            <ul>
+                <li><a href="index.html">Hjem</a></li>
+                <li><a href="bater.html">Tilgjengelige Båter</a></li>
+                <li><a href="kart.html">Kart</a></li>
+                <li><a href="registrere.html">Registrer Båt</a></li>
+                <li><a href="kontakt.html">Kontakt Oss</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section id="hero">
-        <h2>Lei eller registrer din båt i dag!</h2>
-        <p>Nettsiden der du kan leie ut båten din til andre, eller finne en båt å leie nær deg.</p>
-        <button onclick="window.location.href='registrere.html'">Registrer båt</button>
-        <button onclick="window.location.href='bater.html'">Se tilgjengelige båter</button>
-    </section>
+    <main>
+        <section class="intro">
+            <h2>Lei eller lei ut en båt hvor som helst i Norge</h2>
+            <p>Vår tjeneste lar deg enkelt registrere din båt for utleie eller finne en båt å leie hvor som helst i Norge.</p>
+            <button id="learnMoreBtn">Lær mer</button>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2024 Båtutleie Norge</p>
+        <p>© 2024 Båtutleie i Norge. Alle rettigheter reservert.</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
