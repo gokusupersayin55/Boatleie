@@ -1,168 +1,117 @@
-/* Generell styling for hele siden */
-body {
-    font-family: 'Arial', sans-serif;
-    background: #ffffff; /* Hvit bakgrunn på hele siden */
+/* Felles stil for alle sider */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-header {
-    background-color: #004080; /* Mørkeblå bakgrunn på header */
-    color: #ffffff; /* Hvit tekst i header */
-    padding: 1rem;
-    text-align: center;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #004080;
 }
 
 nav a {
-    color: #ffffff;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    background: #0056b3;
-    border-radius: 5px;
+    color: #004080;
     font-weight: bold;
-    transition: background-color 0.3s, transform 0.3s;
+    margin: 0 15px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 nav a:hover {
-    background-color: #003d7a;
-    transform: scale(1.05);
+    background-color: #003366;
+    color: white;
 }
 
-/* Bakgrunn for innholdsområder */
 main {
-    padding: 2rem;
-    background: #e6f0ff; /* Lys blå bakgrunn for main-innholdet */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-form {
-    background: #ffffff; /* Hvit bakgrunn for skjema */
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-form h2 {
-    margin-top: 0;
-    color: #004080; /* Mørkeblå overskrifter */
-    font-size: 1.5rem;
+footer {
     text-align: center;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-input::placeholder {
-    color: #aaaaaa; /* Grå placeholder tekst */
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: #0056b3;
-    outline: none;
-}
-
-input[type="file"] {
-    display: none; /* Skjuler standard filopplasting knapp */
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666;
 }
 
 button {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    color: #ffffff;
     background-color: #004080;
+    color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1em;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #003d7a;
-    transform: scale(1.05);
+    background-color: #003366;
 }
 
-button#addImages {
-    display: block;
-    margin: 1rem auto;
-    background-color: #0066cc; /* Lysere blå for "Legg til bilder"-knappen */
-}
-
-/* Bildevisning */
-#imagePreview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+/* Stil for båtliste og registreringsskjema */
+.boat-item, form {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e0e7ff;
+    border: 1px solid #004080;
+    border-radius: 5px;
 }
 
 #imagePreview img {
-    max-width: 150px;
-    max-height: 150px;
+    width: 100px;
+    height: auto;
+    margin: 5px;
+}
+
+#addImages {
+    background-color: #004080;
+    color: white;
+    border: none;
     border-radius: 5px;
-    object-fit: cover;
-}
-
-/* Dropdown-menyer */
-.select-wrapper {
-    position: relative;
-}
-
-select {
-    appearance: none;
-    background: #ffffff url('path/to/your/arrow-icon.svg') no-repeat right 0.75rem center;
-    background-size: 1rem;
-}
-
-select option {
-    background: #ffffff;
-    color: #000000;
-}
-
-/* Lokasjon-forslag */
-#location-list {
-    position: absolute;
-    background: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    max-height: 200px;
-    overflow-y: auto;
-    width: 100%;
-    z-index: 10;
-}
-
-#location-list .suggestion {
-    padding: 0.75rem;
+    padding: 10px 20px;
     cursor: pointer;
+    font-size: 1em;
 }
 
-#location-list .suggestion:hover {
-    background-color: #f0f0f0;
+#addImages:hover {
+    background-color: #003366;
 }
 
-/* Størrelse-feltet */
-#sizeField {
-    display: flex;
-    align-items: center;
+input[type="text"], input[type="number"], textarea, select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
 }
 
-#sizeField input {
-    flex: 1;
+input[type="text"]::placeholder, input[type="number"]::placeholder, textarea::placeholder {
+    color: #aaa;
 }
 
-#sizeField span {
-    margin-left: 0.5rem;
-    color: #666666;
+span {
+    font-size: 1em;
+    color: #333;
+    margin-left: 5px;
 }
