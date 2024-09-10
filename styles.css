@@ -1,3 +1,6 @@
+/* Importer Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap');
+
 /* Felles stil for alle sider */
 * {
     margin: 0;
@@ -6,52 +9,84 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(to bottom, #004080 60%, #ffffff 60%, #add8e6 100%);
+    background-size: cover;
     color: #333;
     padding: 20px;
 }
 
+/* Bakgrunnsmønster med bølger */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('wave-pattern.png') repeat-x; /* Du må ha et bølgemønsterbilde som wave-pattern.png */
+    opacity: 0.1;
+    z-index: -1;
+}
+
+/* Header */
 header {
     text-align: center;
     margin-bottom: 40px;
 }
 
 header h1 {
-    font-size: 2.5em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 3em;
     color: #004080;
+    margin-bottom: 10px;
 }
 
 nav ul {
     list-style-type: none;
-    margin-top: 20px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 nav ul li {
     display: inline;
-    margin-right: 20px;
 }
 
 nav ul li a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-family: 'Roboto', sans-serif;
     text-decoration: none;
-    color: #004080;
-    font-weight: bold;
+    color: #fff;
+    background-color: #004080;
+    border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
 }
 
+nav ul li a:hover {
+    transform: scale(1.1);
+    background-color: #003366;
+}
+
+/* Hovedinnhold */
 main {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Open Sans', sans-serif;
 }
 
-footer {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #666;
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #004080;
 }
 
 button {
@@ -62,17 +97,55 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
+    transition: transform 0.3s, background-color 0.3s;
 }
 
 button:hover {
+    transform: scale(1.1);
     background-color: #003366;
 }
 
-/* Stil for båtliste og registreringsskjema */
-.boat-item, form {
+/* Stil for skjemaer */
+form {
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 20px;
     background-color: #e0e7ff;
     border: 1px solid #004080;
     border-radius: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Båtliste */
+.boat-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #e0e7ff;
+    border: 1px solid #004080;
+    border-radius: 5px;
+}
+
+.boat-item img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666;
 }
