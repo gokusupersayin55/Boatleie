@@ -3,30 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt</title>
+    <title>Kontakt Oss</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Kontakt</h1>
+        <h1>Kontakt Oss</h1>
         <nav>
-            <ul>
-                <li><a href="index.html">Hjem</a></li>
-                <li><a href="bater.html">Tilgjengelige Båter</a></li>
-                <li><a href="kart.html">Kart</a></li>
-                <li><a href="registrere.html">Registrer Båt</a></li>
-                <li><a href="kontakt.html">Kontakt Oss</a></li>
-            </ul>
+            <a href="index.html">Hjem</a>
+            <a href="bater.html">Tilgjengelige Båter</a>
+            <a href="kart.html">Kart</a>
+            <a href="registrere.html">Registrer Båt</a>
+            <a href="kontakt.html">Kontakt Oss</a>
         </nav>
     </header>
 
     <main>
-        <section id="contact-info">
-            <h2>Kontaktinformasjon</h2>
-            <p>Du kan nå oss på:</p>
-            <p>Email: din.email@example.com</p>
-            <p>Telefon: 123 45 678</p>
-        </section>
+        <h2>Kom i kontakt med oss</h2>
+        <p>Har du spørsmål eller trenger hjelp? Fyll ut skjemaet under, så tar vi kontakt med deg så snart som mulig.</p>
+        <form id="contactForm">
+            <label for="name">Navn</label>
+            <input type="text" id="name" name="name" placeholder="Ditt navn" required>
+
+            <label for="email">E-post</label>
+            <input type="email" id="email" name="email" placeholder="Din e-post" required>
+
+            <label for="message">Melding</label>
+            <textarea id="message" name="message" rows="4" placeholder="Din melding" required></textarea>
+
+            <button type="submit">Send melding</button>
+        </form>
     </main>
 
     <footer>
