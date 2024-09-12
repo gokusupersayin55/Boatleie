@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrer Båt</title>
+    <title>Registrer Din Båt</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,61 +11,49 @@
         <h1>Registrer Din Båt</h1>
         <nav>
             <a href="index.html">Hjem</a>
-            <a href="bater.html">Tilgjengelige Båter</a>
+            <a href="tilgjengelige_bater.html">Tilgjengelige Båter</a>
             <a href="kart.html">Kart</a>
-            <a href="registrere.html">Registrer Båt</a>
+            <a href="registrere.html" class="active">Registrer Båt</a>
             <a href="kontakt.html">Kontakt Oss</a>
         </nav>
     </header>
 
     <main>
-        <form id="boatForm">
-<<<<<<< HEAD
-            <h2>Registrer båt for utleie</h2>
-=======
-            <section class="image-upload">
-                <label for="images">Legg til bilder:</label>
-                <input type="file" id="images" name="images" accept="image/*" multiple>
-                <div id="imagePreview"></div>
-            </section>
->>>>>>> parent of 7a21475 (1.8)
+        <h2>Registrer båt for utleie</h2>
+        <form action="/submit-boat" method="post" enctype="multipart/form-data">
 
-            <div id="imagePreview">
-                <!-- Bilder vil bli vist her -->
+            <!-- Bildeopplasting med fjern-knapp -->
+            <div class="upload-container">
+                <label for="boat-images" class="upload-label">Legg til bilder</label>
+                <input type="file" id="boat-images" name="boat-images[]" accept=".jpeg, .png, .svg, .webp" multiple>
+                <div id="image-preview"></div>
+                <button type="button" id="remove-images">Fjern valgte bilder</button>
             </div>
-            <button type="button" id="addImages">Legg til bilder</button>
 
-            <label for="title" class="visually-hidden">Annonse overskrift</label>
+            <!-- Annonse overskrift -->
             <input type="text" id="title" name="title" placeholder="Annonse overskrift" required>
 
-            <label for="location" class="visually-hidden">Lokasjon</label>
+            <!-- Beskrivelse -->
+            <textarea id="description" name="description" placeholder="Beskrivelse av båten" rows="4" required></textarea>
+
+            <!-- Lokasjon med autofullfør -->
             <input type="text" id="location" name="location" placeholder="Søk kommune" required>
-            <div id="location-list"></div>
+            <ul id="location-suggestions"></ul>
 
-            <label for="pricePer" class="visually-hidden">Pris per</label>
-            <select id="pricePer" name="pricePer" required>
-                <option value="day">Pris per dag</option>
-                <option value="hour">Pris per time</option>
-            </select>
+            <!-- Pris per dag og per time -->
+            <div class="price-container">
+                <input type="number" id="price-per-day" name="price-per-day" placeholder="Pris per dag" required>
+                <input type="number" id="price-per-hour" name="price-per-hour" placeholder="Pris per time" required>
+            </div>
 
-<<<<<<< HEAD
-            <label for="price" class="visually-hidden">Pris</label>
-            <input type="number" id="price" name="price" placeholder="Pris" required>
-=======
-            <label for="size">
+            <!-- Størrelse -->
+            <div class="size-container">
                 <input type="number" id="size" name="size" placeholder="Størrelse" required>
-            </label>
->>>>>>> parent of 7a21475 (1.8)
+                <span class="unit">fot</span>
+            </div>
 
-            <label for="size" class="visually-hidden">Størrelse</label>
-            <input type="number" id="size" name="size" placeholder="Størrelse" required>
-            <span>fot</span>
-
-            <label for="description" class="visually-hidden">Beskrivelse</label>
-            <textarea id="description" name="description" rows="4" placeholder="Beskrivelse av båten" required></textarea>
-
-            <input type="file" id="fileInput" name="images" multiple>
-            <button type="submit">Registrer Båt</button>
+            <!-- Send inn knappen -->
+            <input type="submit" value="Registrer Båt" class="submit-button">
         </form>
     </main>
 

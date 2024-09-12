@@ -1,159 +1,172 @@
-/* Felles stil for alle sider */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Generell styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
 }
 
 header {
-    background-color: #004080; /* Blå bakgrunn */
-    color: #fff; /* Hvit tekst */
-    padding: 10px 20px;
+    background-color: #004a9f;
+    color: white;
+    padding: 10px 0;
     text-align: center;
-    position: relative;
 }
 
 header h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
+    margin: 0;
+    font-size: 28px;
 }
 
 nav {
-    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: #004a9f;
+    padding: 10px 0;
 }
 
 nav a {
-    color: #fff; /* Hvit menytekst */
-    text-decoration: none;
-    font-weight: bold;
+    color: white;
     margin: 0 15px;
+    text-decoration: none;
     position: relative;
-    padding-bottom: 5px;
+    padding: 5px;
+}
+
+nav a:hover {
+    color: #ffcc00; /* Gult ved hover */
 }
 
 nav a::after {
-    content: "";
+    content: '';
     display: block;
-    width: 100%;
+    width: 0;
     height: 2px;
-    background: #00BFFF; /* Lys blå farge for understrek */
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease;
+    background: #ffcc00; /* Understrek ved hover */
+    transition: width 0.3s;
+    margin-top: 5px;
 }
 
 nav a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+    width: 100%;
+}
+
+nav .active {
+    font-weight: bold;
 }
 
 main {
-    max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-footer {
-    text-align: center;
-    margin: 20px 0;
-    font-size: 0.9em;
-    color: #666;
-}
-
-button {
-    background-color: #004080;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #003366;
-}
-
-/* Stil for båtliste og registreringsskjema */
-.boat-item, form {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #e0e7ff;
-    border: 1px solid #004080;
-    border-radius: 5px;
-}
-
-form {
-    background-color: #fff;
-    border: 1px solid #ccc;
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-form input, form select, form textarea {
+/* Input felt */
+input[type="text"],
+input[type="number"],
+textarea {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin: 10px 0;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
-form input::placeholder, form textarea::placeholder {
-    color: #aaa;
+input[type="file"] {
+    padding: 10px;
+    font-size: 14px;
 }
 
-form input[type="submit"] {
-    background-color: #004080;
-    color: #fff;
+.submit-button {
+    background-color: #004a9f;
+    color: white;
+    padding: 12px 20px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-form input[type="submit"]:hover {
-    background-color: #003366;
+.submit-button:hover {
+    background-color: #003e8a;
 }
 
+/* Bildeopplasting */
 .upload-container {
     margin-bottom: 20px;
 }
 
-.upload-container input[type="file"] {
-    display: none;
-}
-
-.upload-container label {
+.upload-label {
+    font-weight: bold;
     display: block;
-    background-color: #004080;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#image-preview {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#image-preview img.uploaded-image {
+    width: 100px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Lokasjon autofullfør */
+#location-suggestions {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+#location-suggestions li {
+    padding: 10px;
     cursor: pointer;
+}
+
+#location-suggestions li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Pris-feltene ved siden av hverandre */
+.price-container {
+    display: flex;
+    gap: 10px;
+}
+
+/* Størrelse-felt */
+.size-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.size-container input[type="number"] {
+    flex: 1;
+}
+
+.size-container .unit {
+    font-size: 16px;
+}
+
+/* Footer styling */
+footer {
     text-align: center;
-    transition: background-color 0.3s;
-}
-
-.upload-container label:hover {
-    background-color: #003366;
-}
-
-.upload-container img {
-    max-width: 100px;
-    margin: 10px 5px 0 0;
-    vertical-align: middle;
+    padding: 20px;
+    background-color: #f1f1f1;
+    margin-top: 20px;
+    font-size: 14px;
 }
