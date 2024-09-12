@@ -1,172 +1,142 @@
 /* Generell styling */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
 }
 
 header {
-    background-color: #004a9f;
+    background-color: #004080;
+    padding: 10px;
     color: white;
-    padding: 10px 0;
     text-align: center;
 }
 
 header h1 {
     margin: 0;
-    font-size: 28px;
+    font-size: 2em;
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    background-color: #004a9f;
-    padding: 10px 0;
+nav ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-nav a {
-    color: white;
+nav ul li {
+    display: inline;
     margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
     text-decoration: none;
-    position: relative;
-    padding: 5px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s;
 }
 
-nav a:hover {
-    color: #ffcc00; /* Gult ved hover */
-}
-
-nav a::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #ffcc00; /* Understrek ved hover */
-    transition: width 0.3s;
-    margin-top: 5px;
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
-nav .active {
-    font-weight: bold;
+nav ul li a:hover {
+    border-bottom: 2px solid white;
 }
 
 main {
-    margin: 20px auto;
     padding: 20px;
     max-width: 800px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    margin: 0 auto;
 }
 
-/* Input felt */
-input[type="text"],
-input[type="number"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-input[type="file"] {
-    padding: 10px;
-    font-size: 14px;
-}
-
-.submit-button {
-    background-color: #004a9f;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.submit-button:hover {
-    background-color: #003e8a;
-}
-
-/* Bildeopplasting */
-.upload-container {
+h2 {
+    font-size: 1.5em;
     margin-bottom: 20px;
 }
 
-.upload-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
+.registrer-seksjon {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#image-preview {
+.input-field {
+    margin-bottom: 15px;
+}
+
+.input-field input, .input-field textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.input-field input::placeholder, .input-field textarea::placeholder {
+    color: #888;
+}
+
+.pris-container {
     display: flex;
     gap: 10px;
-    margin-bottom: 10px;
 }
 
-#image-preview img.uploaded-image {
-    width: 100px;
-    height: auto;
+#pris-dag, #pris-time {
+    width: 48%;
+}
+
+.size-field {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.size-field input {
+    width: 80px; /* Smaller width for the size field */
+}
+
+#image-preview img {
+    max-width: 100px;
+    margin-right: 10px;
+}
+
+button {
+    background-color: #004080;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #003366;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #004080;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.suggestions-list {
+    position: absolute;
+    background-color: white;
     border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-/* Lokasjon autofullfør */
-#location-suggestions {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
     max-height: 150px;
     overflow-y: auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
+    width: 250px;
+    z-index: 1000;
 }
 
-#location-suggestions li {
+.suggestions-list li {
     padding: 10px;
     cursor: pointer;
 }
 
-#location-suggestions li:hover {
+.suggestions-list li:hover {
     background-color: #f0f0f0;
-}
-
-/* Pris-feltene ved siden av hverandre */
-.price-container {
-    display: flex;
-    gap: 10px;
-}
-
-/* Størrelse-felt */
-.size-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.size-container input[type="number"] {
-    flex: 1;
-}
-
-.size-container .unit {
-    font-size: 16px;
-}
-
-/* Footer styling */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #f1f1f1;
-    margin-top: 20px;
-    font-size: 14px;
 }

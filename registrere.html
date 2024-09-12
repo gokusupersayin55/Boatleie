@@ -4,61 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrer Din Båt</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>Registrer Din Båt</h1>
         <nav>
-            <a href="index.html">Hjem</a>
-            <a href="tilgjengelige_bater.html">Tilgjengelige Båter</a>
-            <a href="kart.html">Kart</a>
-            <a href="registrere.html" class="active">Registrer Båt</a>
-            <a href="kontakt.html">Kontakt Oss</a>
+            <ul>
+                <li><a href="index.html">Hjem</a></li>
+                <li><a href="tilgjengelige_bater.html">Tilgjengelige Båter</a></li>
+                <li><a href="kart.html">Kart</a></li>
+                <li><a href="registrer.html">Registrer Båt</a></li>
+                <li><a href="kontakt.html">Kontakt Oss</a></li>
+            </ul>
         </nav>
     </header>
 
     <main>
-        <h2>Registrer båt for utleie</h2>
-        <form action="/submit-boat" method="post" enctype="multipart/form-data">
+        <section class="registrer-seksjon">
+            <h2>Registrer båt for utleie</h2>
 
-            <!-- Bildeopplasting med fjern-knapp -->
-            <div class="upload-container">
-                <label for="boat-images" class="upload-label">Legg til bilder</label>
-                <input type="file" id="boat-images" name="boat-images[]" accept=".jpeg, .png, .svg, .webp" multiple>
+            <!-- Bilder -->
+            <div class="upload-images">
+                <label for="bilde">Legg til bilder:</label>
+                <input type="file" id="bilde" multiple accept=".jpeg, .png, .svg, .webp">
                 <div id="image-preview"></div>
-                <button type="button" id="remove-images">Fjern valgte bilder</button>
+                <button type="button" id="fjern-bilder">Fjern bilder</button>
             </div>
 
             <!-- Annonse overskrift -->
-            <input type="text" id="title" name="title" placeholder="Annonse overskrift" required>
+            <div class="input-field">
+                <input type="text" id="annonse-overskrift" name="annonse-overskrift" placeholder="Annonse overskrift" required>
+            </div>
 
             <!-- Beskrivelse -->
-            <textarea id="description" name="description" placeholder="Beskrivelse av båten" rows="4" required></textarea>
+            <div class="input-field">
+                <textarea id="beskrivelse" name="beskrivelse" placeholder="Beskrivelse av båten" required></textarea>
+            </div>
 
-            <!-- Lokasjon med autofullfør -->
-            <input type="text" id="location" name="location" placeholder="Søk kommune" required>
-            <ul id="location-suggestions"></ul>
+            <!-- Lokasjon -->
+            <div class="input-field">
+                <input type="text" id="lokasjon" name="lokasjon" placeholder="Søk kommune" required>
+                <ul id="location-suggestions" class="suggestions-list"></ul>
+            </div>
 
-            <!-- Pris per dag og per time -->
-            <div class="price-container">
-                <input type="number" id="price-per-day" name="price-per-day" placeholder="Pris per dag" required>
-                <input type="number" id="price-per-hour" name="price-per-hour" placeholder="Pris per time" required>
+            <!-- Pris -->
+            <div class="pris-container">
+                <div class="input-field">
+                    <input type="number" id="pris-dag" name="pris-dag" placeholder="Pris per dag" required>
+                </div>
+                <div class="input-field">
+                    <input type="number" id="pris-time" name="pris-time" placeholder="Pris per time" required>
+                </div>
             </div>
 
             <!-- Størrelse -->
-            <div class="size-container">
-                <input type="number" id="size" name="size" placeholder="Størrelse" required>
-                <span class="unit">fot</span>
+            <div class="size-field">
+                <input type="number" id="storrelse" name="storrelse" placeholder="Størrelse" min="0" max="9999" required>
+                <span>fot</span>
             </div>
 
-            <!-- Send inn knappen -->
-            <input type="submit" value="Registrer Båt" class="submit-button">
-        </form>
+            <!-- Registrer knapp -->
+            <div class="input-field">
+                <button type="submit" id="registrer-bat">Registrer Båt</button>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <p>© 2024 Båtutleie i Norge. Alle rettigheter reservert.</p>
+        <p>&copy; 2024 Båtutleie i Norge. Alle rettigheter reservert.</p>
     </footer>
 
     <script src="script.js"></script>

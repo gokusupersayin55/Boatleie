@@ -1,72 +1,79 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Listen over norske kommuner
-    const kommuner = [
-        "Alstahaug", "Alta", "Alvdal", "Alver", "Andøy", "Aremark", "Arendal", "Asker", "Askvoll", "Askøy",
-        "Aukra", "Aure", "Aurland", "Aurskog-Høland", "Austevoll", "Austrheim", "Averøy", "Balsfjord", "Bamble",
-        "Bardu", "Beiarn", "Berg", "Bergen", "Berlevåg", "Bindal", "Birkenes", "Bjerkreim", "Bjornafjorden", "Bjugn",
-        "Bodø", "Bokn", "Bremanger", "Brønnøy", "Bygland", "Bykle", "Bærum", "Bø", "Bømlo", "Båtsfjord",
-        "Dovre", "Drammen", "Drangedal", "Dyrøy", "Dønna", "Eidfjord", "Eidskog", "Eidsvoll", "Eigersund", "Elverum",
-        "Enebakk", "Engerdal", "Etne", "Etnedal", "Evenes", "Evje og Hornnes", "Farsund", "Fauske", "Fedje", "Finnøy",
-        "Fitjar", "Fjaler", "Fjord", "Flakstad", "Flatanger", "Flekkefjord", "Flesberg", "Flora", "Flå", "Folldal",
-        "Fredrikstad", "Frogn", "Froland", "Frosta", "Frøya", "Fyresdal", "Færder", "Gamvik", "Gausdal", "Gildeskål",
-        "Giske", "Gjemnes", "Gjerdrum", "Gjerstad", "Gjesdal", "Gjøvik", "Gloppen", "Gol", "Gran", "Grane",
-        "Gratangen", "Grimstad", "Grong", "Grue", "Gulen", "Hadsel", "Halden", "Hamar", "Hamarøy", "Hammerfest",
-        "Hareid", "Harstad", "Hasvik", "Hattfjelldal", "Haugesund", "Heim", "Hemnes", "Hemsedal", "Herøy i Møre", "Herøy i Nordland",
-        "Hitra", "Hjartdal", "Hjelmeland", "Hol", "Hole", "Holmestrand", "Holtålen", "Horten", "Hurdal", "Hustadvika",
-        "Hvaler", "Hyllestad", "Hægebostad", "Høyanger", "Høylandet", "Hå", "Ibestad", "Inderøy", "Indre Fosen", "Indre Østfold",
-        "Iveland", "Jevnaker", "Jondal", "Karasjok", "Karlsøy", "Karmøy", "Kautokeino", "Klepp", "Kongsberg", "Kongsvinger",
-        "Kragerø", "Kristiansand", "Kristiansund", "Krødsherad", "Kvam herad", "Kvinesdal", "Kvinnherad", "Kviteseid", "Kvitsøy", "Kvæfjord",
-        "Kvænangen", "Kåfjord", "Larvik", "Lavangen", "Lebesby", "Leirfjord", "Leka", "Lenvik", "Lesja", "Levanger",
-        "Lier", "Lierne", "Lillehammer", "Lillesand", "Lillestrøm", "Lindesnes", "Lom", "Longyearbyen", "Loppa", "Lund",
-        "Lunner", "Lurøy", "Luster", "Lyngdal", "Lyngen", "Lærdal", "Lødingen", "Lørenskog", "Løten", "Malvik",
-        "Marker", "Masfjorden", "Melhus", "Meløy", "Meråker", "Midt-Telemark", "Midtre Gauldal", "Modalen", "Modum", "Molde",
-        "Moskenes", "Moss", "Målselv", "Måsøy", "Namsos", "Namsskogan", "Nannestad", "Narvik", "Nes", "Nesbyen",
-        "Nesna", "Nesodden", "Nesseby", "Nissedal", "Nittedal", "Nome", "Nord-Aurdal", "Nord-Fron", "Nord-Odal", "Nordkapp",
-        "Nordre Follo", "Nordre Land", "Nordreisa", "Nore og Uvdal", "Notodden", "Nærøysund", "Odda", "Oppdal", "Orkland", "Os",
-        "Osen", "Oslo", "Osterøy", "Overhalla", "Porsanger", "Porsgrunn", "Rakkestad", "Rana", "Randaberg", "Rauma",
-        "Rendalen", "Rennebu", "Rennesøy", "Rindal", "Ringebu", "Ringerike", "Ringsaker", "Risør", "Rollag", "Rælingen",
-        "Rødøy", "Røros", "Røst", "Røyrvik", "Råde", "Salangen", "Saltdal", "Samnanger", "Sande", "Sandefjord",
-        "Sandnes", "Sarpsborg", "Sauda", "Sel", "Selbu", "Seljord", "Sigdal", "Siljan", "Sirdal", "Skaun",
-        "Skien", "Skiptvet", "Skjervøy", "Skjåk", "Smøla", "Snillfjord", "Snåsa", "Sogndal", "Sokndal", "Sola",
-        "Solund", "Sortland", "Stad", "Stange", "Stavanger", "Steigen", "Steinkjer", "Stjørdal", "Stord", "Stor-Elvdal",
-        "Storfjord", "Strand", "Stranda", "Stryn", "Sula", "Suldal", "Sunnfjord", "Sunndal", "Surnadal", "Sveio",
-        "Sykkylven", "Sømna", "Søndre Land", "Sør-Aurdal", "Sørfold", "Sør-Fron", "Sør-Odal", "Sørreisa", "Sør-Varanger", "Tana",
-        "Time", "Tingvoll", "Tinn", "Tjeldsund", "Tokke", "Tolga", "Torsken", "Tranøy", "Tromsø", "Trondheim",
-        "Trysil", "Træna", "Tvedestrand", "Tydal", "Tynset", "Tysnes", "Tysvær", "Tønsberg", "Ullensaker", "Ullensvang",
-        "Ulstein", "Ulvik", "Utsira", "Vadsø", "Vaksdal", "Valle", "Vang", "Vanylven", "Vardø", "Vefsn",
-        "Vega", "Vegårshei", "Vennesla", "Verdal", "Vestby", "Vestnes", "Vestre Slidre", "Vestre Toten", "Vestvågøy", "Vevelstad",
-        "Vik", "Vindafjord", "Vinje", "Volda", "Voss", "Værøy", "Vågan", "Vågsøy", "Vågå", "Våler i Hedmark",
-        "Våler i Østfold", "Øksnes", "Ørland", "Ørsta", "Østre Toten", "Øvre Eiker", "Øyer", "Øygarden", "Øystre Slidre", "Åfjord",
-        "Ål", "Ålesund", "Åmli", "Åmot", "Årdal", "Ås", "Åseral", "Åsnes"
-    ];
+// Listen over kommuner i Norge
+const kommuner = [
+    "Oslo", "Bergen", "Trondheim", "Stavanger", "Kristiansand", 
+    "Drammen", "Fredrikstad", "Sandnes", "Tromsø", "Sarpsborg",
+    "Skien", "Bodø", "Ålesund", "Tønsberg", "Moss"
+];
 
-    const locationInput = document.getElementById('lokasjon');
-    const suggestionsList = document.createElement('ul');
-    suggestionsList.id = 'location-suggestions';
-    locationInput.parentNode.appendChild(suggestionsList);
+// Lokasjonsfeltet og forslagselementet
+const lokasjonInput = document.getElementById('lokasjon');
+const suggestions = document.getElementById('location-suggestions');
 
-    locationInput.addEventListener('input', function () {
-        const inputValue = locationInput.value.toLowerCase();
-        suggestionsList.innerHTML = '';
+// Funksjon for å vise kommune-forslag basert på input
+lokasjonInput.addEventListener('input', function () {
+    const query = this.value.toLowerCase();
 
-        if (inputValue.length >= 3) {
-            const filteredKommuner = kommuner.filter(kommune => kommune.toLowerCase().includes(inputValue));
+    // Sjekk om minst 3 bokstaver er skrevet inn
+    if (query.length >= 3) {
+        // Filtrer kommuner basert på input
+        const filteredKommuner = kommuner.filter(kommune => 
+            kommune.toLowerCase().startsWith(query)
+        );
 
-            filteredKommuner.forEach(kommune => {
-                const suggestionItem = document.createElement('li');
-                suggestionItem.textContent = kommune;
-                suggestionItem.addEventListener('click', function () {
-                    locationInput.value = kommune;
-                    suggestionsList.innerHTML = '';
-                });
-                suggestionsList.appendChild(suggestionItem);
+        // Tøm tidligere forslag
+        suggestions.innerHTML = '';
+
+        // Vis forslagene
+        filteredKommuner.forEach(kommune => {
+            const li = document.createElement('li');
+            li.textContent = kommune;
+            li.addEventListener('click', function () {
+                // Når brukeren klikker på et forslag, sett verdien i input-feltet
+                lokasjonInput.value = kommune;
+                suggestions.innerHTML = ''; // Fjern forslagene
             });
-        }
-    });
+            suggestions.appendChild(li);
+        });
 
-    document.addEventListener('click', function (event) {
-        if (!suggestionsList.contains(event.target) && event.target !== locationInput) {
-            suggestionsList.innerHTML = '';
+        // Hvis ingen forslag, skjul listen
+        if (filteredKommuner.length === 0) {
+            suggestions.innerHTML = '';
         }
+
+    } else {
+        // Skjul forslagene om mindre enn 3 bokstaver er skrevet inn
+        suggestions.innerHTML = '';
+    }
+});
+
+// Lukk forslagene om man klikker utenfor feltet
+document.addEventListener('click', function (e) {
+    if (!lokasjonInput.contains(e.target)) {
+        suggestions.innerHTML = '';
+    }
+});
+
+// Forhåndsvisning av bilder
+const imageInput = document.getElementById('bilde');
+const imagePreview = document.getElementById('image-preview');
+const removeButton = document.getElementById('fjern-bilder');
+
+imageInput.addEventListener('change', function () {
+    imagePreview.innerHTML = ''; // Tøm tidligere forhåndsvisninger
+    const files = Array.from(this.files);
+
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            imagePreview.appendChild(img);
+        }
+        reader.readAsDataURL(file);
     });
+});
+
+removeButton.addEventListener('click', function () {
+    imageInput.value = '';
+    imagePreview.innerHTML = ''; // Fjern alle forhåndsvisninger
 });
