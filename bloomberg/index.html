@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloomberg Terminal</title>
+  <link rel="stylesheet" href="css/terminal.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ═══════════════ TOP BAR ═══════════════ -->
+  <header id="topbar">
+    <div id="logo-block">
+      <span id="logo-text">BLOOMBERG</span>
+      <span id="logo-sub">TERMINAL</span>
+    </div>
+
+    <nav id="top-nav">
+      <button class="nav-btn active" data-panel="markets">MARKETS</button>
+      <button class="nav-btn" data-panel="crypto">CRYPTO</button>
+      <button class="nav-btn" data-panel="forex">FOREX</button>
+      <button class="nav-btn" data-panel="news">NEWS</button>
+      <button class="nav-btn" data-panel="portfolio">PORTFOLIO</button>
+      <button class="nav-btn" data-panel="economics">ECONOMICS</button>
+      <button class="nav-btn" data-panel="screener">SCREENER</button>
+    </nav>
+
+    <div id="topbar-right">
+      <div id="market-status">
+        <span id="market-status-dot"></span>
+        <span id="market-status-text">MARKET OPEN</span>
+      </div>
+      <div id="clock-block">
+        <div id="clock-time">--:--:--</div>
+        <div id="clock-date">--- --, ----</div>
+        <div id="clock-tz">EST</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ TICKER TAPE ═══════════════ -->
+  <div id="ticker-bar">
+    <div id="ticker-label">LIVE</div>
+    <div id="ticker-track">
+      <div id="ticker-tape"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ALERT BANNER ═══════════════ -->
+  <div id="alert-banner" class="hidden"></div>
+
+  <!-- ═══════════════ MAIN LAYOUT ═══════════════ -->
+  <div id="main-layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside id="left-sidebar">
+
+      <!-- Watchlist -->
+      <div class="panel" id="watchlist-panel">
+        <div class="panel-header">
+          <span class="panel-title">WATCHLIST</span>
+          <button class="panel-btn" id="add-watchlist-btn" title="Add symbol">+</button>
+        </div>
+        <div class="panel-body" id="watchlist-body">
+          <div class="loading-spinner">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Indices -->
+      <div class="panel" id="indices-panel">
+        <div class="panel-header">
+          <span class="panel-title">INDICES</span>
+          <span class="panel-badge">DELAYED</span>
+        </div>
+        <div class="panel-body" id="indices-body">
+          <div class="loading-spinner">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Sector Heatmap -->
+      <div class="panel" id="sector-panel">
+        <div class="panel-header">
+          <span class="panel-title">SECTORS</span>
+        </div>
+        <div class="panel-body" id="sector-body"></div>
+      </div>
+
+    </aside>
+
+    <!-- CENTER: CHART + TABS -->
+    <div id="center-col">
+
+      <!-- Chart header / symbol selector -->
+      <div id="chart-header">
+        <div id="chart-symbol-block">
+          <span id="chart-symbol-name">BITCOIN</span>
+          <span id="chart-symbol-ticker">BTC-USD</span>
+          <span id="chart-price" class="price-up">--</span>
+          <span id="chart-change" class="price-up">-- (--)</span>
+        </div>
+        <div id="chart-controls">
+          <div id="chart-type-btns">
+            <button class="ctrl-btn active" data-type="candlestick">CANDLE</button>
+            <button class="ctrl-btn" data-type="line">LINE</button>
+            <button class="ctrl-btn" data-type="area">AREA</button>
+            <button class="ctrl-btn" data-type="bar">BAR</button>
+          </div>
+          <div id="chart-range-btns">
+            <button class="ctrl-btn active" data-range="1D">1D</button>
+            <button class="ctrl-btn" data-range="5D">5D</button>
+            <button class="ctrl-btn" data-range="1M">1M</button>
+            <button class="ctrl-btn" data-range="3M">3M</button>
+            <button class="ctrl-btn" data-range="6M">6M</button>
+            <button class="ctrl-btn" data-range="1Y">1Y</button>
+            <button class="ctrl-btn" data-range="5Y">5Y</button>
+          </div>
+          <div id="indicator-btns">
+            <button class="ctrl-btn" id="toggle-ma" title="Moving Averages">MA</button>
+            <button class="ctrl-btn" id="toggle-bb" title="Bollinger Bands">BB</button>
+            <button class="ctrl-btn" id="toggle-rsi" title="RSI">RSI</button>
+            <button class="ctrl-btn" id="toggle-macd" title="MACD">MACD</button>
+            <button class="ctrl-btn" id="toggle-vol" title="Volume">VOL</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Chart -->
+      <div id="chart-container">
+        <div id="main-chart"></div>
+        <div id="sub-chart" class="hidden"></div>
+      </div>
+
+      <!-- Stats row -->
+      <div id="stats-row">
+        <div class="stat-item"><span class="stat-label">OPEN</span><span class="stat-value" id="stat-open">--</span></div>
+        <div class="stat-item"><span class="stat-label">HIGH</span><span class="stat-value" id="stat-high">--</span></div>
+        <div class="stat-item"><span class="stat-label">LOW</span><span class="stat-value" id="stat-low">--</span></div>
+        <div class="stat-item"><span class="stat-label">CLOSE</span><span class="stat-value" id="stat-close">--</span></div>
+        <div class="stat-item"><span class="stat-label">VOLUME</span><span class="stat-value" id="stat-vol">--</span></div>
+        <div class="stat-item"><span class="stat-label">MKT CAP</span><span class="stat-value" id="stat-mktcap">--</span></div>
+        <div class="stat-item"><span class="stat-label">P/E</span><span class="stat-value" id="stat-pe">--</span></div>
+        <div class="stat-item"><span class="stat-label">52W HIGH</span><span class="stat-value" id="stat-52h">--</span></div>
+        <div class="stat-item"><span class="stat-label">52W LOW</span><span class="stat-value" id="stat-52l">--</span></div>
+        <div class="stat-item"><span class="stat-label">AVG VOL</span><span class="stat-value" id="stat-avgvol">--</span></div>
+      </div>
+
+      <!-- Tabbed bottom panel -->
+      <div id="bottom-panel">
+        <div id="tab-bar">
+          <button class="tab-btn active" data-tab="news">NEWS FEED</button>
+          <button class="tab-btn" data-tab="orderbook">ORDER BOOK</button>
+          <button class="tab-btn" data-tab="economics">ECONOMIC DATA</button>
+          <button class="tab-btn" data-tab="options">OPTIONS CHAIN</button>
+          <button class="tab-btn" data-tab="earnings">EARNINGS</button>
+          <button class="tab-btn" data-tab="screener">SCREENER</button>
+        </div>
+        <div id="tab-content">
+
+          <!-- NEWS -->
+          <div id="tab-news" class="tab-pane active">
+            <div id="news-feed"><div class="loading-spinner">Loading news...</div></div>
+          </div>
+
+          <!-- ORDER BOOK -->
+          <div id="tab-orderbook" class="tab-pane hidden">
+            <div id="orderbook-container">
+              <div id="orderbook-asks"></div>
+              <div id="orderbook-spread"></div>
+              <div id="orderbook-bids"></div>
+            </div>
+          </div>
+
+          <!-- ECONOMIC DATA -->
+          <div id="tab-economics" class="tab-pane hidden">
+            <div id="economics-container"></div>
+          </div>
+
+          <!-- OPTIONS CHAIN -->
+          <div id="tab-options" class="tab-pane hidden">
+            <div id="options-container">
+              <div id="options-controls">
+                <label>EXPIRY: <select id="options-expiry"></select></label>
+                <label>TYPE:
+                  <select id="options-type">
+                    <option value="all">ALL</option>
+                    <option value="calls">CALLS</option>
+                    <option value="puts">PUTS</option>
+                  </select>
+                </label>
+              </div>
+              <div id="options-table-wrap">
+                <table id="options-table">
+                  <thead>
+                    <tr>
+                      <th colspan="5" class="calls-header">CALLS</th>
+                      <th class="strike-header">STRIKE</th>
+                      <th colspan="5" class="puts-header">PUTS</th>
+                    </tr>
+                    <tr>
+                      <th>LAST</th><th>BID</th><th>ASK</th><th>IV</th><th>OI</th>
+                      <th>STRIKE</th>
+                      <th>LAST</th><th>BID</th><th>ASK</th><th>IV</th><th>OI</th>
+                    </tr>
+                  </thead>
+                  <tbody id="options-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- EARNINGS -->
+          <div id="tab-earnings" class="tab-pane hidden">
+            <div id="earnings-container"></div>
+          </div>
+
+          <!-- SCREENER -->
+          <div id="tab-screener" class="tab-pane hidden">
+            <div id="screener-container">
+              <div id="screener-filters">
+                <select id="filter-sector"><option value="">All Sectors</option></select>
+                <select id="filter-mktcap"><option value="">All Market Caps</option><option value="mega">Mega Cap</option><option value="large">Large Cap</option><option value="mid">Mid Cap</option><option value="small">Small Cap</option></select>
+                <input id="filter-min-vol" type="number" placeholder="Min Volume" />
+                <input id="filter-max-pe" type="number" placeholder="Max P/E" />
+                <button id="run-screener" class="action-btn">RUN SCREENER</button>
+              </div>
+              <div id="screener-results"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside id="right-sidebar">
+
+      <!-- Crypto -->
+      <div class="panel" id="crypto-panel">
+        <div class="panel-header">
+          <span class="panel-title">CRYPTO</span>
+          <span class="panel-badge live-badge">LIVE</span>
+        </div>
+        <div class="panel-body" id="crypto-body">
+          <div class="loading-spinner">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Forex -->
+      <div class="panel" id="forex-panel">
+        <div class="panel-header">
+          <span class="panel-title">FOREX</span>
+          <span class="panel-badge live-badge">LIVE</span>
+        </div>
+        <div class="panel-body" id="forex-body">
+          <div class="loading-spinner">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Commodities -->
+      <div class="panel" id="commodities-panel">
+        <div class="panel-header">
+          <span class="panel-title">COMMODITIES</span>
+          <span class="panel-badge">DELAYED</span>
+        </div>
+        <div class="panel-body" id="commodities-body">
+          <div class="loading-spinner">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Mini charts row -->
+      <div class="panel" id="mini-charts-panel">
+        <div class="panel-header">
+          <span class="panel-title">MINI CHARTS</span>
+        </div>
+        <div id="mini-charts-grid">
+          <div class="mini-chart-wrap" data-symbol="BTC"><div class="mini-chart-label">BTC</div><canvas class="mini-chart"></canvas></div>
+          <div class="mini-chart-wrap" data-symbol="ETH"><div class="mini-chart-label">ETH</div><canvas class="mini-chart"></canvas></div>
+          <div class="mini-chart-wrap" data-symbol="SOL"><div class="mini-chart-label">SOL</div><canvas class="mini-chart"></canvas></div>
+          <div class="mini-chart-wrap" data-symbol="BNB"><div class="mini-chart-label">BNB</div><canvas class="mini-chart"></canvas></div>
+        </div>
+      </div>
+
+    </aside>
+
+  </div><!-- end main-layout -->
+
+  <!-- ═══════════════ COMMAND BAR ═══════════════ -->
+  <div id="command-bar">
+    <div id="cmd-prefix">BBG&gt;</div>
+    <input id="cmd-input" type="text" spellcheck="false" autocomplete="off"
+           placeholder="Enter symbol or command (e.g. AAPL, BTC, HELP, WEI, FXIP...)" />
+    <div id="cmd-hints">
+      <span class="hint-key">F1</span><span class="hint-val">HELP</span>
+      <span class="hint-key">F2</span><span class="hint-val">MARKETS</span>
+      <span class="hint-key">F8</span><span class="hint-val">CRYPTO</span>
+      <span class="hint-key">ESC</span><span class="hint-val">CLEAR</span>
+      <span class="hint-key">↑↓</span><span class="hint-val">HISTORY</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CMD AUTOCOMPLETE ═══════════════ -->
+  <div id="cmd-autocomplete" class="hidden"></div>
+
+  <!-- ═══════════════ MODAL ═══════════════ -->
+  <div id="modal-overlay" class="hidden">
+    <div id="modal-box">
+      <div id="modal-header">
+        <span id="modal-title">INFO</span>
+        <button id="modal-close">✕</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PORTFOLIO MODAL ═══════════════ -->
+  <div id="portfolio-modal" class="hidden">
+    <div id="portfolio-box">
+      <div class="panel-header">
+        <span class="panel-title">PORTFOLIO MANAGER</span>
+        <button id="portfolio-close">✕</button>
+      </div>
+      <div id="portfolio-content">
+        <div id="portfolio-add-form">
+          <input id="p-symbol" type="text" placeholder="Symbol (e.g. BTC)" />
+          <input id="p-qty" type="number" placeholder="Quantity" />
+          <input id="p-price" type="number" placeholder="Avg. Cost" />
+          <button id="p-add-btn" class="action-btn">ADD POSITION</button>
+        </div>
+        <div id="portfolio-table-wrap">
+          <table id="portfolio-table">
+            <thead>
+              <tr><th>SYMBOL</th><th>QTY</th><th>AVG COST</th><th>CURRENT</th><th>P&L</th><th>P&L%</th><th>VALUE</th><th></th></tr>
+            </thead>
+            <tbody id="portfolio-tbody"></tbody>
+          </table>
+        </div>
+        <div id="portfolio-summary">
+          <div class="stat-item"><span class="stat-label">TOTAL VALUE</span><span class="stat-value" id="p-total-val">$0.00</span></div>
+          <div class="stat-item"><span class="stat-label">TOTAL P&amp;L</span><span class="stat-value" id="p-total-pnl">$0.00</span></div>
+          <div class="stat-item"><span class="stat-label">TOTAL P&amp;L %</span><span class="stat-value" id="p-total-pct">0.00%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ALERT CONFIG ═══════════════ -->
+  <div id="alert-modal" class="hidden">
+    <div id="alert-box">
+      <div class="panel-header">
+        <span class="panel-title">PRICE ALERTS</span>
+        <button id="alert-close">✕</button>
+      </div>
+      <div id="alert-content">
+        <div id="alert-add-form">
+          <input id="al-symbol" type="text" placeholder="Symbol" />
+          <select id="al-direction">
+            <option value="above">Price Above</option>
+            <option value="below">Price Below</option>
+          </select>
+          <input id="al-price" type="number" placeholder="Target Price" />
+          <button id="al-add-btn" class="action-btn">SET ALERT</button>
+        </div>
+        <div id="alert-list"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end #app -->
+
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
